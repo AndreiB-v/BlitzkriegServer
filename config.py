@@ -12,4 +12,4 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY") or "never_gues_my_key"
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL") or \
         "sqlite:///" + os.path.join(base_dir, "app.db")
-    FLASK_APP = os.environ.get("FLASK_APP") or os.path.join(base_dir, "run.py")
+    FLASK_APP = os.environ.get("FLASK_APP") or os.path.join(base_dir, "server.py")
