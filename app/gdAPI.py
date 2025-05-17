@@ -1,7 +1,7 @@
 import base64
 import re
 import zlib
-import aiohttp
+import niquests
 from math import floor
 from app.request_data import request_data_post
 
@@ -39,7 +39,7 @@ async def find_lvl(lvl_string: str) -> dict or None:
     }
 
     # Получение данных
-    async with aiohttp.ClientSession() as session:
+    async with niquests.AsyncSession() as session:
         lined_text = await request_data_post(url, data, headers, session)
         lined_text = lined_text.split('#')
         levels = lined_text[0].split('|')
@@ -71,7 +71,7 @@ async def find_lvl(lvl_string: str) -> dict or None:
 
     # Версия игры, когда был построен уровень
     if int(info['13']) <= 7:
-        version = float(f'1.{int(info['13']) - 1}')
+        version = float(f'1.{int(info["13"]) - 1}')
     elif int(info['13']) == 10:
         version = 1.7
     else:
@@ -125,7 +125,7 @@ async def get_blitzkrieg(lvl_id: int or str) -> list:
     url = "http://www.boomlings.com/database/downloadGJLevel22.php"
 
     # Получение данных
-    async with aiohttp.ClientSession() as session:
+    async with niquests.AsyncSession() as session:
         level = await request_data_post(url, data, headers, session)
         level = dict_from_string(level, ':')
 

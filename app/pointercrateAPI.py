@@ -1,16 +1,16 @@
 import asyncio
-import aiohttp
+import niquests
 from app.request_data import request_data_get
 
 
-async def get_demonlist() -> list[dict]:
+async def get_demonlist():
     """
     Возвращает список уровней, отсортированных по их позиции в топе.
     Список состоит из словарей формата get_lvl (следующая функция)
     """
     url = 'https://pointercrate.com/api/v2/demons/listed/'
 
-    async with aiohttp.ClientSession() as session:
+    async with niquests.AsyncSession() as session:
         tasks = [request_data_get(url, {'limit': 50, 'after': i}, session) for i in range(0, 101, 50)]
         top = []
         for task in asyncio.as_completed(tasks):
@@ -41,7 +41,7 @@ async def get_lvl(lvl_id: int or str) -> dict or None:
     """
     url = 'https://pointercrate.com/api/v2/demons/listed/'
 
-    async with aiohttp.ClientSession() as session:
+    async with niquests.AsyncSession() as session:
         demon = await request_data_get(url, {'level_id': lvl_id}, session)
 
     if demon:

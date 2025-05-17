@@ -2,10 +2,10 @@
 
 
 async def request_data_get(url, params, session):
-    async with session.get(url, params=params) as resp:
-        return await resp.json()
+    resp = await session.get(url, params=params)
+    return resp.json()
 
 
 async def request_data_post(url, data, headers, session):
-    async with session.post(url, data=data, headers=headers) as resp:
-        return await resp.text()
+    resp = await session.post(url, data=data, headers=headers)
+    return resp.text

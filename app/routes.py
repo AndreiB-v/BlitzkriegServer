@@ -121,10 +121,10 @@ def level(lvl_id):
         table = []
         if lvl is None:
             # Находим start_pos копию
-            for response in asyncio.run(async_tasks([find_lvl(f'{gd['title']} startpos'[:20]),
-                                                     find_lvl(f'{gd['title']} sp'[:20])])):
+            for response in asyncio.run(async_tasks([find_lvl(f'{gd["title"]} startpos'[:20]),
+                                                     find_lvl(f'{gd["title"]} sp'[:20])])):
                 if type(response) is dict:
-                    if response['title'].lower() == f'{gd['title']} startpos'[:20].lower():
+                    if response['title'].lower() == f'{gd["title"]} startpos'[:20].lower():
                         start_pos = response
                         break
                     else:
